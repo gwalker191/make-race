@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Make-Race — Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home / Lobby -->
+    <section class="screen" id="home">
+      <header class="topbar">
+        <div class="left">Settings</div>
+        <div class="center">Make-Race</div>
+        <div class="right">$ <span id="money">100</span></div>
+      </header>
+      <main class="centerStage">
+        <h1>Make & Race</h1>
+        <div class="bigButtons">
+          <button data-target="select-car" class="primary">Choose Car</button>
+          <button data-target="garage">Garage</button>
+          <button data-target="track-select">Race</button>
+        </div>
+      </main>
+      <footer class="footer">Cute background, playful art</footer>
+    </section>
+
+    <!-- Car Selection -->
+    <section class="screen" id="select-car">
+      <header class="topbar"><button class="back" data-target="home">←</button><div class="center">Select Car</div></header>
+      <main class="grid">
+        <div class="carCard" data-target="garage">
+          <div class="thumb" style="background:#FF7F7F">Car A</div>
+          <div class="meta">Speed: 5 • Handling: 4 • Cost: Free</div>
+          <button data-target="garage">Select</button>
+        </div>
+        <div class="carCard" data-target="garage">
+          <div class="thumb" style="background:#7FB3FF">Car B</div>
+          <div class="meta">Speed: 6 • Handling: 3 • Cost: 50</div>
+          <button data-target="garage">Select</button>
+        </div>
+        <div class="carCard" data-target="garage">
+          <div class="thumb" style="background:#7FFF9E">Car C</div>
+          <div class="meta">Speed: 4 • Handling: 6 • Cost: 75</div>
+          <button data-target="garage">Select</button>
+        </div>
+      </main>
+    </section>
+
+    <!-- Garage / Customization -->
+    <section class="screen" id="garage">
+      <header class="topbar"><button class="back" data-target="home">←</button><div class="center">Garage</div></header>
+      <main class="garageLayout">
+        <div class="preview">
+          <svg width="320" height="180" viewBox="0 0 320 180">
+            <rect x="10" y="40" width="300" height="80" rx="12" fill="#FF7F7F" />
+            <circle cx="70" cy="130" r="16" fill="#333" />
+            <circle cx="250" cy="130" r="16" fill="#333" />
+          </svg>
+        </div>
+        <div class="controls">
+          <div class="tabs">
+            <button class="active">Paint</button>
+            <button>Parts</button>
+            <button>Accessories</button>
+          </div>
+          <div class="panel">
+            <div class="palette">
+              <button class="swatch" style="background:#FF7F7F"></button>
+              <button class="swatch" style="background:#7FB3FF"></button>
+              <button class="swatch" style="background:#7FFF9E"></button>
+            </div>
+            <div class="statBars">
+              <div>Speed <progress value="5" max="10"></progress></div>
+              <div>Handling <progress value="4" max="10"></progress></div>
+              <div>Durability <progress value="7" max="10"></progress></div>
+            </div>
+          </div>
+          <div class="actions">
+            <button data-target="track-select" class="primary">Save & Race</button>
+            <button data-target="home">Back</button>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- Track Select -->
+    <section class="screen" id="track-select">
+      <header class="topbar"><button class="back" data-target="home">←</button><div class="center">Select Track</div></header>
+      <main class="grid">
+        <div class="levelCard" data-target="race-hud">
+          <h3>Level 1</h3>
+          <p>Straight drag track</p>
+        </div>
+        <div class="levelCard" data-target="race-hud">
+          <h3>Level 2</h3>
+          <p>Jumps appear</p>
+        </div>
+        <div class="levelCard" data-target="race-hud">
+          <h3>Level 3</h3>
+          <p>Slime under jumps</p>
+        </div>
+        <div class="levelCard" data-target="race-hud">
+          <h3>Level 4</h3>
+          <p>Rocks and wood obstacles</p>
+        </div>
+      </main>
+    </section>
+
+    <!-- Race HUD (prototype) -->
+    <section class="screen" id="race-hud">
+      <header class="topbar"><button class="back" data-target="track-select">←</button><div class="center">Race</div><div class="right">$ <span id="money2">100</span></div></header>
+      <main class="raceArea">
+        <div class="track">
+          <div class="car" id="car">🏎️</div>
+          <div class="hazard slime">💧 slime</div>
+          <div class="hazard rock">🪨 rock</div>
+        </div>
+        <div class="hud">
+          <div class="speed">Speed: 60</div>
+          <div class="controlsHint">Tap to Jump • Hold for big jump</div>
+        </div>
+      </main>
+      <div class="raceFooter">
+        <button data-target="post-race" class="primary">Finish Race</button>
+      </div>
+    </section>
+
+    <!-- Post-Race Summary -->
+    <section class="screen" id="post-race">
+      <header class="topbar"><div class="center">Results</div></header>
+      <main class="centerStage">
+        <h2>Win!</h2>
+        <p>You earned $50</p>
+        <div class="bigButtons">
+          <button data-target="garage">Repair & Upgrade</button>
+          <button data-target="track-select" class="primary">Next Race</button>
+        </div>
+      </main>
+    </section>
+
+  </div>
+  <script>
+    // Simple prototype navigation
+    document.addEventListener('click', function(e){
+      var t = e.target.closest('[data-target]');
+      if(!t) return;
+      var target = t.getAttribute('data-target');
+      if(target){
+        document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+        var dest = document.getElementById(target);
+        if(dest) dest.style.display='block';
+      }
+    });
+    // show initial screen
+    document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+    document.getElementById('home').style.display='block';
+  </script>
+</body>
+</html>

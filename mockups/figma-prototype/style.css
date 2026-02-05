@@ -1,0 +1,30 @@
+*{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+body{margin:0;background:linear-gradient(180deg,#FDF6E3,#FFF);color:#222}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#FFFAE6}
+.topbar .center{font-weight:700;font-size:20px}
+.screen{min-height:100vh;display:flex;flex-direction:column}
+.centerStage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bigButtons{display:flex;gap:12px;flex-direction:column;align-items:center}
+button{padding:12px 18px;border-radius:12px;border:none;background:#EEE;font-weight:700}
+button.primary{background:#FF8C42;color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:12px}
+.carCard{background:#fff;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.thumb{width:100%;height:80px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+.garageLayout{display:flex;gap:12px;padding:12px}
+.preview{flex:1;background:#fff;border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center}
+.controls{width:320px;display:flex;flex-direction:column;gap:8px}
+.tabs{display:flex;gap:8px}
+.tabs button{flex:1}
+.palette{display:flex;gap:8px}
+.palette .swatch{width:40px;height:40px;border-radius:8px;border:2px solid #fff}
+.statBars{background:#FFF;padding:8px;border-radius:8px}
+.raceArea{flex:1;display:flex;flex-direction:column}
+.track{flex:1;background:linear-gradient(#CFF1FF,#9EE8FF);margin:12px;border-radius:12px;padding:12px;position:relative}
+.car{position:absolute;left:20px;bottom:20px;font-size:28px}
+.hazard{position:absolute;right:40px;bottom:24px;background:rgba(0,0,0,0.06);padding:6px;border-radius:8px}
+.hud{padding:8px;display:flex;justify-content:space-between}
+.raceFooter{padding:12px;display:flex;justify-content:center}
+.levelCard{background:#fff;padding:12px;border-radius:12px}
+.footer{padding:12px;text-align:center;color:#666}
+.back{background:transparent;font-size:16px}
+@media (max-width:720px){.garageLayout{flex-direction:column}.controls{width:100%}}
