@@ -8,27 +8,20 @@ Recommended Unity version
 - Use a Unity LTS (2021.3 or 2022.3+) for stability and WebGL support.
 
 Files added
-- Assets/Scripts/CarTemplate.cs
-- Assets/Scripts/VehicleController.cs
-- Assets/Scripts/GameManager.cs
-- Assets/Scripts/FinishLine.cs
-- Assets/Scripts/UIManager.cs
-- Assets/Scripts/SaveSystem.cs
-- Assets/Scripts/GarageManager.cs
+- Assets/Scripts/CarTemplate.cs — Car stat template (ScriptableObject)
+- Assets/Scripts/VehicleController.cs — Car movement + input (uses InputManager)
+- Assets/Scripts/GameManager.cs — Game state + rewards
+- Assets/Scripts/FinishLine.cs — Finish trigger, calls GameManager
+- Assets/Scripts/UIManager.cs — HUD + modals
+- Assets/Scripts/SaveSystem.cs — Local save (PlayerPrefs)
+- Assets/Scripts/GarageManager.cs — Car selection
+- Assets/Scripts/InputManager.cs — Centralized input handler (singleton)
+- Assets/Scripts/Level.cs — Base class for level logic
+- Assets/Scripts/Level1Manager.cs — Level 1 (drag race) logic
+- Assets/Scripts/CameraFollowController.cs — 3rd-person racing camera
 
 Quick setup
 1. Create a new 3D Unity project (LTS recommended).
 2. In the Project window create a folder `Assets/Scripts` and paste the C# files into it.
-3. Create a new Scene `MainScene` and set up GameObjects:
-   - Create an empty `GameManager` object and attach `GameManager` + `UIManager` (or separate objects) scripts.
-   - Create a `Player` object (capsule or model), add `Rigidbody` and `VehicleController`. Tag it as `Player`.
-   - Create a finish object (cube) with `IsTrigger` enabled and attach `FinishLine` script (assign `GameManager`).
-   - Create a Canvas with `Text` elements for money and post-race panel; assign them to `UIManager` references.
-4. Create `CarTemplate` assets: Right-click in Project > Create > MakeRace/CarTemplate and configure base stats.
-5. Run the scene and control the car with `W/A/S/D` or arrow keys, jump with `Space`.
-
-Notes
-- The scripts are intentionally minimal to keep the prototype fast to assemble. They include PlayerPrefs-based saving for money.
-- Next step I can implement a sample Unity scene and small prefabs, but that requires a Unity project binary (I can provide guidance and scripts which you can drop in).
-
-Want me to create a small sample Unity package (.unitypackage) with a prebuilt scene and prefabs you can import? If so I can create the steps to generate it and bundle assets.
+3. See **SCENE_SETUP.md** in this folder for detailed step-by-step scene assembly instructions.
+4. Open the scene, press Play, and drive to the finish line.

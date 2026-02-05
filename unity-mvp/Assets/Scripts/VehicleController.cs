@@ -24,10 +24,9 @@ public class VehicleController : MonoBehaviour
     {
         if (template == null) return;
 
-        float accel = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? 1f : 0f;
-        float steer = 0f;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) steer = -1f;
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) steer = 1f;
+        InputManager input = InputManager.Instance;
+        float accel = input.GetAcceleration();
+        float steer = input.GetSteer();
 
         // Move forward based on template.baseSpeed
         Vector3 forwardMove = transform.forward * accel * template.baseSpeed * speedMultiplier * Time.fixedDeltaTime;
@@ -42,7 +41,8 @@ public class VehicleController : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && grounded)
+        InputManager input = InputManager.Instance;
+        if (input.GetJumpInput() && grounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             grounded = false;
